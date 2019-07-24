@@ -24,10 +24,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
+           
             "scripts": []
-          },
+          }
+          ,
+          
           "configurations": {
             "production": {
               "fileReplacements": [
@@ -36,6 +40,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+             
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -84,7 +89,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
