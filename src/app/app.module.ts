@@ -23,7 +23,7 @@ const routes : Routes=  [
     AppComponent,
     HeaderComponent,   
   ],
-  imports: [
+  imports: [ 
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
