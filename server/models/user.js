@@ -17,18 +17,21 @@ password:{type:String,
 rentals:[{type:Schema.Types.ObjectId,ref:'Rental'}]
 
 });
+userSchema.methods.hasSamePassword = function(requestedPassword){
+     return  bcrypt.compare(requestedPassword,this.password);
+  }
 
 userSchema.pre('save',function(){
      const user =this;
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(user.password, salt, function(err, hash) {
            user.password = hash;
-           
+           console.log("encryption done");
+        
         });
     });
 })
 
-userSchema.method.hasSamePassword = function(requestedPassword){
-      return  bcrypt.compareSync(requestedPassword,this.password);}
+
 
 module.exports =  mongoose.model('User',userSchema);
