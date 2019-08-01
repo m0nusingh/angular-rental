@@ -17,13 +17,12 @@ exports.auth = function(req,res){
             return   res.status(422).send({errors:[{title:"Invalid user",detail:"user doenst exsist"}]});
           }
 
-         if( user.hasSamePassword(password)){
+         if( user.hasSamePassword(password) ){
             const token = jwt.sign({
                userId: user.id,
                username:user.username
             }, config.SECRET,{expiresIn: '1h'})
-
-            res.json(token);         
+            return res.json(token);  
              }else{
             return   res.status(422).send({errors:[{title:"Invalid data",detail:"email or password wrong "}]});
          }
@@ -32,34 +31,42 @@ exports.auth = function(req,res){
 }
 
 exports.register = function(req,res){
-
+         console.log("reached register func");
     const { username,email,password,passwordConfirmation } = req.body;
-     
-    if(!password || ! email)
+     debugger;
+    if(!password || !email)
     return   res.status(422).send({errors:[{title:"Data Missing",detail:"Provide email and password "}]});
-    if(password!==passwordConfirmation)
-    res.status(422).send({errors:[{title:"Password Missmatch",detail:"confirm password must be same and password "}]});
+                if(password!==passwordConfirmation )
+         return   res.status(422).send({errors:[{title:"Password Missmatc h",detail:"confirm password must be same and password "}]});
  
      User.findOne({email},function(err,exixtingUser ){
          if(err){
             return  res.status(422).send({errors:normalizeErrors(err.errors)});
          }
       if(exixtingUser){
+         console.log("user found");
         return  res.status(422).send({errors:[{title:"Invalid Email",detail:"user already exists"}]});
+        
       }
+      console.log("user not found");
       const user = new User({
           username,
           email,
           password
       }); 
          user.save(function(err){
-            return  res.status(422).send({errors:normalizeErrors(err.errors)});
+            if(err){
+               console.log("err while saving");
+               return  res.status(422).send({errors:normalizeErrors(err.errors)});
+            }
+            console.log("donee");
+            return    res.json({'registered':true});
+         
          }); 
 
-         return    res.json({'registered':true});
+        
      });
-     return  res.json({username,email});
-
+  
 }
 
 

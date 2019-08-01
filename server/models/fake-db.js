@@ -64,7 +64,7 @@ class FakeDb {
     }
 
     seedDb(){
-          this.pushRentalsToDb();
+        //   this.pushRentalsToDb();
     }
 
 }

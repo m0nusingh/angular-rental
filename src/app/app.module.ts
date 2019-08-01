@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import {HeaderComponent}  from './common/header/header-component';
 import {RentalModule} from './rental/rental.module';
 
-
+import {AuthModule} from './auth/auth.module';
 const routes : Routes=  [
   {path:'',redirectTo:'/rentals',pathMatch:'full'}
 ]
@@ -16,13 +16,15 @@ const routes : Routes=  [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+   
   ],
   imports: [ 
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routes),
     RentalModule,
+    AuthModule
     
   ],
   providers: [],
