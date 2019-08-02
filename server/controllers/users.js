@@ -3,6 +3,7 @@ const User =  require("../models/user");
 const {normalizeErrors} = require("../helpers/mongoose");
 const config = require('../config/dev');
 const jwt = require('jsonwebtoken');
+const bcrypt =  require('bcrypt');
 exports.auth = function(req,res){
 
    const { email,password } = req.body;
@@ -30,7 +31,7 @@ exports.auth = function(req,res){
 
 }
 
-exports.register = function(req,res){
+exports.register =  function(req,res){
          console.log("reached register func");
     const { username,email,password,passwordConfirmation } = req.body;
      debugger;
@@ -54,7 +55,8 @@ exports.register = function(req,res){
           email,
           password
       }); 
-         user.save(function(err){
+   
+      user.save(function(err){
             if(err){
                console.log("err while saving");
                return  res.status(422).send({errors:normalizeErrors(err.errors)});
