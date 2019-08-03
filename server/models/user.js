@@ -12,7 +12,8 @@ password:{type:String,
     required:"Password is required"
 },
 
-rentals:[{type:Schema.Types.ObjectId,ref:'Rental'}]
+rentals:[{type:Schema.Types.ObjectId,ref:'Rental'}],
+bookings: [ {type:Schema.Types.ObjectId,ref:'Booking'}]
 
 });
 userSchema.methods.hasSamePassword = function(requestedPassword){

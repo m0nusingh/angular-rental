@@ -5,6 +5,7 @@ const config = require('./config/dev');
 const Rental =  require('./models/rental');
 const rentalRoutes = require('./routes/rentals');
 const userRoutes = require('./routes/users');
+const bookingRoutes = require('./routes/bookings');
 const FakeDb  =require('./models/fake-db');
 const bodyParser = require('body-parser');
 mongoose.set('useCreateIndex', true);
@@ -20,7 +21,8 @@ app.use(bodyParser.json());
 
 app.use('/api/v1/rentals',rentalRoutes);
 
-app.use('/api/v1/users',userRoutes)
+app.use('/api/v1/users',userRoutes);
+app.use('/api/v1/booking',bookingRoutes);
 app.get('/rentals',function(req,res){
     console.log("herer");
    res.json({'success':true});
