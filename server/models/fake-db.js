@@ -40,19 +40,24 @@ class FakeDb {
        this.users = [{
            username:"Monu_singh",
            email:"test@test1.com",
-           password:"testbest"
-       }];
+           password:"testtest"
+       },
+       {
+        username:"King khan",
+        email:"test1@test1.com",
+        password:"testtest"
+    }];
     }
 
    async  cleanDb(){
         await User.remove({});
-        // await Rental.remove({});
+         await Rental.remove({});
      
     }
 
     pushRentalsToDb(){
        const user  = new User(this.users[0]);
-
+       const user2  = new User(this.users[1]);
         this.rentals.forEach((rental)=>{
             const newRental = new Rental(rental);
               newRental.user =user;
@@ -61,10 +66,11 @@ class FakeDb {
              
         });
         user.save();
+        user2.save();
     }
 
     seedDb(){
-        //   this.pushRentalsToDb();
+          this.pushRentalsToDb();
     }
 
 }
